@@ -46,7 +46,7 @@ function App() {
 
   let isToken = localStorage.getItem('token')
 
-  function RequireAuth({ authUser }) {
+  const RequireAuth = ({ authUser }) => {
     const location = useLocation();
     if (!authUser) {
       return <Navigate to="/login" state={{ from: location }} />;
@@ -61,91 +61,47 @@ function App() {
         toggleMode={toggleMode}
       />
       <Alert alert={alert} />
-      <div className="row">
-        <div className="col-md-12"></div>
-        <Routes>
-          <Route exact path="/" element={<Layout />}>
+      <Routes>
+        <Route exact path="/" element={<Layout />}>
+          <Route
+            path="/login"
+            element={<Login showAlert={showAlert} />}
+          />
+          <Route
+            path="/signup"
+            element={
+              <Signup showAlert={showAlert} theme={theme} />}
+          />
+          <Route
+            path="/logout"
+            element={<Logout theme={theme} showAlert={showAlert} />}
+          />
+          <Route element={<RequireAuth authUser={isToken} />} >
             <Route
-              path="/login"
+              path="/home"
               element={
-                <>
-                  <Login
-                    showAlert={showAlert}
-                  />
-                </>
+                <Home theme={theme} showAlert={showAlert}
+                />
               }
             />
             <Route
-              path="/signup"
+              path="/addPatient"
               element={
-                <>
-                  <Signup
-                    showAlert={showAlert}
-                    theme={theme}
-                  />
-                </>
-              }
+                <AddPatient theme={theme} showAlert={showAlert} />}
             />
             <Route
-              path="/logout"
+              path="/patient/:id"
               element={
-                <>
-                  <Logout
-                    theme={theme}
-                    showAlert={showAlert}
-                  />
-                </>
-              }
+                <AddPatient theme={theme} showAlert={showAlert} />}
             />
-            <Route element={<RequireAuth authUser={isToken} />} >
-              <Route
-                path="/home"
-                element={
-                  <>
-                    <Home
-                      theme={theme}
-                      showAlert={showAlert}
-                    />
-                  </>
-                }
-              />
-              <Route
-                path="/addPatient"
-                element={
-                  <>
-                    <AddPatient
-                      theme={theme}
-                      showAlert={showAlert}
-                    />
-                  </>
-                }
-              />
-              <Route
-                path="/patient/:id"
-                element={
-                  <>
-                    <AddPatient
-                      theme={theme}
-                      showAlert={showAlert}
-                    />
-                  </>
-                }
-              />
-              <Route
-                path="/displayPatients"
-                element={
-                  <>
-                    <DisplayPatients
-                      theme={theme}
-                      showAlert={showAlert}
-                    />
-                  </>
-                }
-              />
-            </Route>
+            <Route
+              path="/displayPatients"
+              element={
+                <DisplayPatients theme={theme} showAlert={showAlert} />}
+            />
           </Route>
-        </Routes>
-      </div>
+        </Route>
+      </Routes>
     </>
   );
 }
