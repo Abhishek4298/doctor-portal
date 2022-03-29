@@ -1,5 +1,4 @@
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
@@ -15,6 +14,7 @@ import Signup from './components/Authorization/Signup';
 import Logout from './components/Authorization/Logout';
 import AddPatient from "./components/AddPatient";
 import DisplayPatients from "./components/DisplayPatients";
+import Layout from "./components/Layout";
 require('./App.css')
 
 function App() {
@@ -57,99 +57,94 @@ function App() {
 
   return (
     <>
-      <div>
-        <NavbarLink mode={theme}
-          toggleMode={toggleMode}
-        />
-        <Alert alert={alert} />
-        <div className="row">
-          <div className="col-md-12"></div>
-          <Router>
-            <Routes>
+      <NavbarLink mode={theme}
+        toggleMode={toggleMode}
+      />
+      <Alert alert={alert} />
+      <div className="row">
+        <div className="col-md-12"></div>
+        <Routes>
+          <Route exact path="/" element={<Layout />}>
+            <Route
+              path="/login"
+              element={
+                <>
+                  <Login
+                    showAlert={showAlert}
+                  />
+                </>
+              }
+            />
+            <Route
+              path="/signup"
+              element={
+                <>
+                  <Signup
+                    showAlert={showAlert}
+                    theme={theme}
+                  />
+                </>
+              }
+            />
+            <Route
+              path="/logout"
+              element={
+                <>
+                  <Logout
+                    theme={theme}
+                    showAlert={showAlert}
+                  />
+                </>
+              }
+            />
+            <Route element={<RequireAuth authUser={isToken} />} >
               <Route
-                path="/login"
+                path="/home"
                 element={
                   <>
-                    <Login
-                      showAlert={showAlert}
-                    />
-                  </>
-                }
-              />
-              <Route
-                path="/signup"
-                element={
-                  <>
-                    <Signup
-                      showAlert={showAlert}
+                    <Home
                       theme={theme}
+                      showAlert={showAlert}
                     />
                   </>
                 }
               />
               <Route
-                path="/logout"
+                path="/addPatient"
                 element={
                   <>
-                    <Logout
+                    <AddPatient
                       theme={theme}
                       showAlert={showAlert}
                     />
                   </>
                 }
               />
-              <Route element={<RequireAuth authUser={isToken} />} >
-                <Route
-                  exact
-                  path="/home"
-                  element={
-                    <>
-                      <Home
-                        theme={theme}
-                        showAlert={showAlert}
-                      />
-                    </>
-                  }
-                />
-                <Route
-                  path="/addPatient"
-                  element={
-                    <>
-                      <AddPatient
-                        theme={theme}
-                        showAlert={showAlert}
-                      />
-                    </>
-                  }
-                />
-                <Route
-                  exact
-                  path="/patient/:id"
-                  element={
-                    <>
-                      <AddPatient
-                        theme={theme}
-                        showAlert={showAlert}
-                      />
-                    </>
-                  }
-                />
-                <Route
-                  exact
-                  path="/displayPatients"
-                  element={
-                    <>
-                      <DisplayPatients
-                        theme={theme}
-                        showAlert={showAlert}
-                      />
-                    </>
-                  }
-                />
-              </Route>
-            </Routes>
-          </Router>
-        </div>
+              <Route
+                path="/patient/:id"
+                element={
+                  <>
+                    <AddPatient
+                      theme={theme}
+                      showAlert={showAlert}
+                    />
+                  </>
+                }
+              />
+              <Route
+                path="/displayPatients"
+                element={
+                  <>
+                    <DisplayPatients
+                      theme={theme}
+                      showAlert={showAlert}
+                    />
+                  </>
+                }
+              />
+            </Route>
+          </Route>
+        </Routes>
       </div>
     </>
   );
