@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { BACKEND_URI } from "../config/constants";
 
 const DisplayPatients = (props) => {
+    document.title = "Clinic - DisplayPatient"
+
     const [patient, setPatient] = useState([]);
     useEffect(() => {
         axios
@@ -21,7 +23,6 @@ const DisplayPatients = (props) => {
         axios
             .delete(`${BACKEND_URI}/patient/${id}`)
             .then((resp) => {
-                console.log("====delete ==> :: resp", resp);
                 const filteredData = patient.filter((ele) => ele._id !== id);
                 setPatient(filteredData);
             })

@@ -23,7 +23,7 @@ const Login = (props) => {
         else {
             localStorage.setItem('token', json.authToken);
             props.showAlert("Login successful", "success")
-            navigate("/");
+            navigate("/home");
         }
 
     }
@@ -37,7 +37,7 @@ const Login = (props) => {
             <div className="container">
                 <div className="col-left">
                     <div className="login-text">
-                        <h2>CelloIP Clinic</h2>
+                        <h2>  Clinic</h2>
                         <p>
                             Skip the waiting room.
                             Consult with a doctor
@@ -45,7 +45,7 @@ const Login = (props) => {
                             Verified doctors respond in 5 minutes
                             100% Private and confidential
                         </p>
-                        <a className="btn" href="">Read More</a>
+                        <a className="btn" href="/login">Read More</a>
                     </div>
                 </div>
                 <div className="col-right">
@@ -61,13 +61,17 @@ const Login = (props) => {
                                 <input type="password" placeholder="Password" className="form-control" value={credentials.password} onChange={onChange} name="password" id="password" required />
                             </p>
                             <p>
-                                <input className="btn" type="submit" value="Sing In" />
+                                <input className="btn" type="submit" value="Sign In" />
 
                             </p>
                             <p>
                                 <Link to="/login">Forget password?</Link>
-                                <Link to="/signup">Create an account.</Link>
+                                <Link className="mx-2" to="/signup">Create an account.</Link>
+
                             </p>
+                            <button type="button" className="mx-5 login-with-google-btn" >
+                                Login with Google
+                            </button>
                         </form>
                     </div>
                 </div>

@@ -1,9 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
 const Doctors = require("../model/Doctor.models");
 const { successResponse, errorResponse, uniqueId } = require('../helpers');
-
 require("dotenv").config();
 
 exports.createDoctor = async (req, res) => {

@@ -38,7 +38,7 @@ const Signup = (props) => {
             <div className="container">
                 <div className="col-left">
                     <div className="login-text">
-                        <h2>CelloIP Clinic</h2>
+                        <h2>  Clinic</h2>
                         <p>
                             Skip the waiting room.
                             Consult with a doctor
@@ -46,7 +46,7 @@ const Signup = (props) => {
                             Verified doctors respond in 5 minutes
                             100% Private and confidential
                         </p>
-                        <a className="btn" href="">Read More</a>
+                        <a className="btn" href="/login">Read More</a>
                     </div>
                 </div>
                 <div className="col-right">
@@ -63,11 +63,15 @@ const Signup = (props) => {
                                 <input type="password" placeholder="Password" className="form-control" value={credentials.password} onChange={onChange} name="password" id="password" />
                             </p>
                             <p>
-                                <input className="btn" type="submit" value="Sing In" />
+                                <input className="btn" type="submit" value="Sign In" />
                             </p>
                             <p>
                                 <Link to="/login">Already a user.</Link>
                             </p>
+                            <button type="button" className="mx-5 login-with-google-btn" >
+                                SignUp with Google
+                            </button>
+
                         </form>
                     </div>
                 </div>

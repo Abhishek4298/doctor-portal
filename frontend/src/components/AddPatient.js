@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { BACKEND_URI } from "../config/constants";
 
 const AddPatient = (props) => {
+    document.title = "Clinic - AddPatient"
     let { id } = useParams();
     const navigate = useNavigate();
 
@@ -20,7 +21,7 @@ const AddPatient = (props) => {
                 setPatient(allData);
             })
             .catch((err) => {
-                console.log("~ err", err);
+                props.showAlert("unable to fetch data", "danger")
             });
     }
     useEffect(() => {
@@ -44,7 +45,6 @@ const AddPatient = (props) => {
                 })
                 .catch((error) => {
                     props.showAlert("can not update Patient", "danger")
-                    console.log(error);
                 });
         }
         // Add Patient
@@ -56,8 +56,6 @@ const AddPatient = (props) => {
             })
             .catch((error) => {
                 props.showAlert("Patient is not registered", "danger")
-                console.log(error);
-
             });
     };
     const handleReset = (e) => {

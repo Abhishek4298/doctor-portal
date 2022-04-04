@@ -1,4 +1,7 @@
 import { Navbar, Nav, Form, Button, FormControl } from 'react-bootstrap'
+import { Link } from "react-router-dom";
+import LogoName from '../Logo.svg'
+
 
 const NavbarLink = (props) => {
     let isToken = localStorage.getItem('token')
@@ -7,21 +10,23 @@ const NavbarLink = (props) => {
     }
     return (<>
         <Navbar className="fixed-top" bg={props.mode} variant={props.mode}>
-            <Navbar.Brand href="/">{props.title}</Navbar.Brand>
+            <Navbar.Brand href="/home">
+                <img src={LogoName} alt="logo" width="60" height="40" />
+            </Navbar.Brand>
+
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav activeKey="/addPatient"
-                    className="mr-auto">
+                <Nav className="me-auto">
                     {!isToken ?
                         <>
-                            <Nav.Link href="/login">{props.login}</Nav.Link>
-                            <Nav.Link href="/signup">{props.signup}</Nav.Link>
+                            <Link to="/login" className="nav-link"> {props.login}</Link>
+                            <Link to="/signup" className="nav-link"> {props.signup}</Link>
                         </> :
                         <>
-                            <Nav.Link href="/home">{props.home}</Nav.Link>
-                            <Nav.Link href="/addPatient">{props.addPatient}</Nav.Link>
-                            <Nav.Link href="/displayPatients">{props.displayPatients}</Nav.Link>
-                            <Nav.Link href="/logout">{props.logout} </Nav.Link>
+                            <Link to="/home" className="nav-link"> {props.home}</Link>
+                            <Link to="/addPatient" className="nav-link"> {props.addPatient}</Link>
+                            <Link to="/displayPatients" className="nav-link"> {props.displayPatients}</Link>
+                            <Link to="/logout" className="nav-link"> {props.logout} </Link>
                         </>
 
                     }
@@ -54,7 +59,7 @@ const NavbarLink = (props) => {
 }
 
 NavbarLink.defaultProps = {
-    title: "CelloIP-Doctor",
+    title: "Doctor",
     home: "Home",
     addPatient: "AddPatient",
     displayPatients: "DisplayPatients",

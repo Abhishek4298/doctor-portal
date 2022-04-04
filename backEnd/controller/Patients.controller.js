@@ -7,10 +7,8 @@ require("dotenv").config();
 exports.getPatients = async (req, res) => {
   try {
     const PatientsData = await Patients.find();
-    console.log("======> :: PatientsData", PatientsData);
     res.json({ PatientsData })
   } catch (error) {
-    console.log("======> :: error", error);
     res.status(500).send("Internal server error")
   }
 };
@@ -21,7 +19,6 @@ exports.fetchPatientDetails = async (req, res) => {
     let fetchPatient = await Patients.findOne({ _id: patientId }).select("-password");
     res.json(fetchPatient)
   } catch (error) {
-    console.log("======> :: error", error);
     res.status(500).send("Internal server error")
   }
 };
@@ -116,7 +113,6 @@ exports.deletePatient = async (req, res) => {
     patient = await Patients.findByIdAndDelete({ _id: req.params.id })
     res.status(200).json({ deletedPatient: patient });
   } catch (error) {
-    console.log("======> :: error", error);
     res.status(500).send("Internal Server Error");
   }
 }
@@ -127,7 +123,6 @@ exports.getPatient = async (req, res) => {
     const PatientData = await Patients.findById({ _id: id });
     res.json({ PatientData })
   } catch (error) {
-    console.log("======> :: error", error);
     res.status(500).send("Internal server error")
   }
 };
