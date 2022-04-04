@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const validator = require('validator');
 const Schema = mongoose.Schema;
 
-const patientsSchema = new Schema(
+const Patients = new Schema(
   {
     name: {
       type: String,
@@ -44,6 +44,4 @@ const patientsSchema = new Schema(
   { versionKey: false }
 );
 
-const Patients = mongoose.model("Patients", patientsSchema);
-
-module.exports = Patients;
+module.exports = mongoose.model("Patients", Patients);

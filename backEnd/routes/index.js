@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { getPatients, getPatient, login, register, fetchPatientDetails, updatePatient, deletePatient } = require("../controller/Patients.controller");
+const { login, register, getPatients, getPatient, fetchPatientDetails, updatePatient, deletePatient } = require("../controller/Patients.controller");
+const { registerDoctor, loginDoctor, createDoctor, getDoctorPatient, getDoctors, fetchDoctorDetails, updateDoctor, deleteDoctor, getDoctor } = require("../controller/Doctors.controller");
+
 const jwtVerify = require("../middleware/jwtVerify");
 
 router.use((req, res, next) => {
@@ -8,9 +10,14 @@ router.use((req, res, next) => {
   next();
 });
 
-// Authentication
+// Authentication Patient
 router.post("/login", login);
 router.post("/register", register);
+
+// Authentication Doctor
+router.post("/doctor/login", loginDoctor);
+router.post("/doctor/register", registerDoctor);
+
 
 // Patient
 router.get("/patients", getPatients);
@@ -18,5 +25,14 @@ router.get("/patient/:id", getPatient);
 router.get("/fetchPatientDetail", jwtVerify, fetchPatientDetails);
 router.put("/patient/:id", updatePatient);
 router.delete("/patient/:id", deletePatient);
+
+router.post("/doctor", createDoctor);
+router.get("/doctors", getDoctors);
+router.get("/doctorPatients", getDoctorPatient);
+router.get("/doctor/:id", getDoctor);
+router.get("/fetchPatientDetail", jwtVerify, fetchDoctorDetails);
+router.put("/doctor/:id", updateDoctor);
+router.delete("/doctor/:id", deleteDoctor);
+
 
 module.exports = router;

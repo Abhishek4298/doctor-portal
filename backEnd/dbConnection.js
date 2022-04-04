@@ -1,7 +1,8 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 
 const dbConnect = () => {
-    const mongoURI = `mongodb+srv://instagramUsername:instagramPassword@cluster0.7uz5e.mongodb.net/instgramDatabase?retryWrites=true&w=majority`;
+    const mongoURI = process.env.MONGODB_URL;
     mongoose.connect(mongoURI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,

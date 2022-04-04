@@ -1,13 +1,16 @@
-const Patients = require("../model/Patient.models");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const Patients = require("../model/Patient.models");
+
 require("dotenv").config();
 
 exports.getPatients = async (req, res) => {
   try {
     const PatientsData = await Patients.find();
+    console.log("======> :: PatientsData", PatientsData);
     res.json({ PatientsData })
   } catch (error) {
+    console.log("======> :: error", error);
     res.status(500).send("Internal server error")
   }
 };
