@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
+import axios from "axios";
+import { BACKEND_URI } from "../../config/constants";
 require('./Auth.css')
 
 const Login = (props) => {
@@ -8,7 +10,7 @@ const Login = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch("http://localhost:8080/login", {
+        const response = await fetch(`${BACKEND_URI}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -31,7 +33,16 @@ const Login = (props) => {
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
-
+    const GoogleApi = () => {
+        axios
+            .get(`${BACKEND_URI}/google`)
+            .then((resp) => {
+                navigate("/googleAuth");
+            })
+            .catch((err) => {
+                console.log("~ err", err);
+            });
+    }
     return (
         <div style={{ padding: "0px" }}>
             <div className="container">
@@ -69,7 +80,7 @@ const Login = (props) => {
                                 <Link className="mx-2" to="/signup">Create an account.</Link>
 
                             </p>
-                            <button type="button" className="mx-5 login-with-google-btn" >
+                            <button type="button" onClick={GoogleApi} className="mx-5 login-with-google-btn" >
                                 Login with Google
                             </button>
                         </form>

@@ -15,6 +15,7 @@ import Logout from './components/Authorization/Logout';
 import AddPatient from "./components/AddPatient";
 import DisplayPatients from "./components/DisplayPatients";
 import Layout from "./components/Layout";
+import GoogleAUTH from "./components/Authorization/GoogleAUth";
 require('./App.css')
 
 function App() {
@@ -63,6 +64,10 @@ function App() {
       <Alert alert={alert} />
       <Routes>
         <Route exact path="/" element={<Layout />}>
+          <Route
+            path="/googleAuth"
+            element={<GoogleAUTH />}
+          />
           <Route
             path="/login"
             element={<Login showAlert={showAlert} />}

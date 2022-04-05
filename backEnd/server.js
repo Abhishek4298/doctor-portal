@@ -3,8 +3,8 @@ const port = 8080;
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+const session = require('express-session');
+const passport = require('passport');
 const router = require("./routes/index");
 const dbConnect = require('./dbConnection')
 
