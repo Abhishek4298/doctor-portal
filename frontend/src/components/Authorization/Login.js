@@ -29,13 +29,12 @@ const Login = (props) => {
         }
 
     }
-
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
     const GoogleApi = () => {
         axios
-            .get(`${BACKEND_URI}/google`)
+            .get(`${BACKEND_URI}/google-auth/google`)
             .then((resp) => {
                 navigate("/googleAuth");
             })

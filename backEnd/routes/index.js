@@ -3,7 +3,8 @@ const router = express.Router();
 const { login, register, getPatients, getPatient, fetchPatientDetails, updatePatient, deletePatient } = require("../controller/Patients.controller");
 const { registerDoctor, loginDoctor, createDoctor, getDoctorPatient, getDoctors, fetchDoctorDetails, updateDoctor, deleteDoctor, getDoctor } = require("../controller/Doctors.controller");
 const session = require('express-session');
-const passport = require('passport');
+const googleRouter = require("./googleAuth");
+
 require('../middleware/passportAuth');
 
 const jwtVerify = require("../middleware/jwtVerify");
@@ -37,39 +38,7 @@ router.get("/fetchPatientDetail", jwtVerify, fetchDoctorDetails);
 router.put("/doctor/:id", updateDoctor);
 router.delete("/doctor/:id", deleteDoctor);
 
-// GOogle auth
-function isLoggedIn(req, res, next) {
-  req.user ? next() : res.sendStatus(401);
-}
-
-router.get('/google', (req, res) => {
-  res.send('<a href="/auth/google">Authenticate with Google</a>');
-});
-
-router.get('/auth/google',
-  passport.authenticate('google', { scope: ['email', 'profile'] }
-  ));
-
-router.get('/auth/google/callback',
-  passport.authenticate('google', {
-    successRedirect: '/protected',
-    failureRedirect: '/auth/google/failure'
-  })
-);
-
-router.get('/protected', isLoggedIn, (req, res) => {
-  res.send(`Hello ${req.user.displayName}`);
-});
-
-router.get('/logout', (req, res) => {
-  req.logout();
-  req.session.destroy();
-  res.send('Goodbye!');
-});
-
-router.get('/auth/google/failure', (req, res) => {
-  res.send('Failed to authenticate..');
-});
+router.use("/google-auth", googleRouter);
 
 
 module.exports = router;

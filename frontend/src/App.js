@@ -52,7 +52,6 @@ function App() {
     if (!authUser) {
       return <Navigate to="/login" state={{ from: location }} />;
     }
-
     return <Outlet />;
   }
 

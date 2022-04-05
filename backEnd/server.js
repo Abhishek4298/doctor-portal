@@ -1,10 +1,7 @@
 const express = require("express");
 const port = 8080;
-const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
-const session = require('express-session');
-const passport = require('passport');
 const router = require("./routes/index");
 const dbConnect = require('./dbConnection')
 
