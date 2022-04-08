@@ -1,4 +1,4 @@
-import { Navbar, Nav, Form, Button, FormControl } from 'react-bootstrap'
+import { Navbar, Nav, Form, Button, FormControl, NavDropdown } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import LogoName from '../Logo.svg'
 
@@ -28,8 +28,16 @@ const NavbarLink = (props) => {
                             <Link to="/displayPatients" className="nav-link"> {props.displayPatients}</Link>
                             <Link to="/logout" className="nav-link"> {props.logout} </Link>
                         </>
-
                     }
+                    <NavDropdown title="Features" id="basic-nav-dropdown">
+                        <NavDropdown.Item>
+                            <Link to="/todolist" className="nav-link">To-Do List</Link>
+                        </NavDropdown.Item>
+                        <NavDropdown.Item>
+                            <Link to="/calculator" className="nav-link">Calculator</Link>
+                        </NavDropdown.Item>
+                    </NavDropdown>
+
                 </Nav>
                 <div style={{
                     display: "flex",
