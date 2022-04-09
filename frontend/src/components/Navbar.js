@@ -1,13 +1,19 @@
+import { useState } from 'react';
 import { Navbar, Nav, Form, Button, FormControl, NavDropdown } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import LogoName from '../Logo.svg'
-
 
 const NavbarLink = (props) => {
     let isToken = localStorage.getItem('token')
     if (!isToken) {
         isToken = null
     }
+    const [search, setSearch] = useState("")
+
+    const setSearchInput = (e) => {
+        setSearch(e.target.value)
+    }
+
     return (<>
         <Navbar className="fixed-top" bg={props.mode} variant={props.mode}>
             <Navbar.Brand href="/home">
@@ -37,7 +43,6 @@ const NavbarLink = (props) => {
                             <Link to="/calculator" className="nav-link">Calculator</Link>
                         </NavDropdown.Item>
                     </NavDropdown>
-
                 </Nav>
                 <div style={{
                     display: "flex",
@@ -46,13 +51,17 @@ const NavbarLink = (props) => {
                 }}>
                     {
                         isToken && <Form className="d-flex">
-                            <FormControl
+                            <input
                                 type="search"
                                 placeholder="Search"
                                 className="me-2"
                                 aria-label="Search"
+                                value={search}
+                                onChange={setSearchInput}
                             />
-                            <Button variant="outline-success">Search</Button>
+                            <Button
+                                onClick={() => props.onSearch(search)}
+                                variant="outline-success">Search</Button>
                         </Form>
                     }
 

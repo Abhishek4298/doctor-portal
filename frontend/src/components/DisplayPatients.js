@@ -47,32 +47,37 @@ const DisplayPatients = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {patient.map((ele, index) => (
-                                <tr key={ele._id}>
-                                    <td>{index + 1}</td>
-                                    <td>{ele.name}</td>
-                                    <td>{ele.age}</td>
-                                    <td>{ele.email}</td>
-                                    <div
-                                        style={{
-                                            textDecoration: "none",
-                                            display: "flex",
-                                            justifyContent: "flex-start",
-                                            alignItems: "center",
-                                        }}
-                                    >
-                                        <Link className="nav-link" to={`/patient/${ele._id}`}>
-                                            <i className="fa fa-pencil-square-o"
-                                                aria-hidden="true"></i>
-                                        </Link>
-                                        <i
-                                            onClick={() => patientDeleteHandler(ele._id)}
-                                            className="fa fa-trash-o"
-                                            aria-hidden="true"
-                                        ></i>
-                                    </div>
-                                </tr>
-                            ))}
+                            {patient.filter(user => props.search ? (
+                                user.name?.toLowerCase()?.includes(props.search?.toLowerCase()) ||
+                                user.age?.toString()?.includes(props.search?.toLowerCase()) ||
+                                user.email?.toLowerCase()?.includes(props.search?.toLowerCase())
+                            ) : true)
+                                .map((ele, index) => (
+                                    <tr key={ele._id}>
+                                        <td>{index + 1}</td>
+                                        <td>{ele.name}</td>
+                                        <td>{ele.age}</td>
+                                        <td>{ele.email}</td>
+                                        <div
+                                            style={{
+                                                textDecoration: "none",
+                                                display: "flex",
+                                                justifyContent: "flex-start",
+                                                alignItems: "center",
+                                            }}
+                                        >
+                                            <Link className="nav-link" to={`/patient/${ele._id}`}>
+                                                <i className="fa fa-pencil-square-o"
+                                                    aria-hidden="true"></i>
+                                            </Link>
+                                            <i
+                                                onClick={() => patientDeleteHandler(ele._id)}
+                                                className="fa fa-trash-o"
+                                                aria-hidden="true"
+                                            ></i>
+                                        </div>
+                                    </tr>
+                                ))}
                         </tbody>
                     </table>
                     <nav>

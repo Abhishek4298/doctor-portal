@@ -23,7 +23,10 @@ require('./App.css')
 function App() {
   let [theme, setTheme] = useState("light")
   let [alert, setAlert] = useState(null)
-
+  const [search, setSearch] = useState("")
+  const onSearch = (data) => {
+    setSearch(data)
+  }
   const showAlert = ((message, type) => {
     setAlert({
       msg: message,
@@ -56,11 +59,11 @@ function App() {
     }
     return <Outlet />;
   }
-
   return (
     <>
       <NavbarLink mode={theme}
         toggleMode={toggleMode}
+        onSearch={onSearch}
       />
       <Alert alert={alert} />
       <Routes>
@@ -111,7 +114,7 @@ function App() {
             <Route
               path="/displayPatients"
               element={
-                <DisplayPatients theme={theme} showAlert={showAlert} />}
+                <DisplayPatients search={search} theme={theme} showAlert={showAlert} />}
             />
           </Route>
         </Route>
