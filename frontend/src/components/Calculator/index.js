@@ -1,50 +1,43 @@
-import { useState } from 'react';
+import { useState } from 'react'
+import './calculator.css';
 
-require('./calculator.css')
 const Calculator = () => {
-    const [display, setDisplay] = useState("ss")
-    const result = "1234";
+    const [data, setData] = useState("")
+    const onNumberClick = (num) => {
 
-    const onChange = (e) => {
-        e.preventDefault();
-        alert("asddas")
+        setData((str) => str ? str + num.toString() : num.toString())
+    }
+    const deleteButton = () => {
+        console.log("Hello");
+    }
+    const calculate = () => {
+        if (data) {
+            setData(eval(data))
+        }
     }
     return (<>
-
-        <h2> Calculator</h2>
-        <div className="result">
-            <p>{result}</p>
+        <div className="calculator-grid">
+            <div className="output">
+                <div className="current-operand">{data}</div>
+            </div>
+            <button onClick={() => setData("")} className="span-two">AC</button>
+            <button onClick={deleteButton}>DEL</button>
+            <button onClick={() => onNumberClick("÷")}>÷</button>
+            <button onClick={() => onNumberClick(1)}>1</button>
+            <button onClick={() => onNumberClick(2)}>2</button>
+            <button onClick={() => onNumberClick(3)}>3</button>
+            <button onClick={() => onNumberClick("*")}>*</button>
+            <button onClick={() => onNumberClick(5)}>5</button>
+            <button onClick={() => onNumberClick(6)}>6</button>
+            <button onClick={() => onNumberClick("+")}>+</button>
+            <button onClick={() => onNumberClick(7)}>7</button>
+            <button onClick={() => onNumberClick(8)}>8</button>
+            <button onClick={() => onNumberClick(9)}>9</button>
+            <button onClick={() => onNumberClick("-")}>-</button>
+            <button onClick={() => onNumberClick(".")}>.</button>
+            <button onClick={() => onNumberClick(0)}>0</button>
+            <button onClick={calculate} className="span-two">=</button>
         </div>
-
-        <div className="button">
-            <button name="(" value={display} onClick={e => (e.target.name)} onChange={onChange}>(</button>
-            <button name="CE" value={display} onClick={e => (e.target.name)} onChange={onChange}>CE</button>
-            <button name=")" value={display} onClick={e => (e.target.name)} onChange={onChange}>)</button>
-            <button name="C" value={display} onClick={e => (e.target.name)} onChange={onChange}>C</button><br />
-
-            <button name="1" value={display} onClick={e => (e.target.name)} onChange={onChange}>1</button>
-            <button name="2" value={display} onClick={e => (e.target.name)} onChange={onChange}>2</button>
-            <button name="3" value={display} onClick={e => (e.target.name)} onChange={onChange}>3</button>
-            <button name="+" value={display} onClick={e => (e.target.name)} onChange={onChange}>+</button><br />
-
-
-            <button name="4" value={display} onClick={e => (e.target.name)} onChange={onChange}>4</button>
-            <button name="5" value={display} onClick={e => (e.target.name)} onChange={onChange}>5</button>
-            <button name="6" value={display} onClick={e => (e.target.name)} onChange={onChange}>6</button>
-            <button name="-" value={display} onClick={e => (e.target.name)} onChange={onChange}>-</button><br />
-
-            <button name="7" value={display} onClick={e => (e.target.name)} onChange={onChange}>7</button>
-            <button name="8" value={display} onClick={e => (e.target.name)} onChange={onChange}>8</button>
-            <button name="9" value={display} onClick={e => (e.target.name)} onChange={onChange}>9</button>
-            <button name="*" value={display} onClick={e => (e.target.name)} onChange={onChange}>x</button><br />
-
-
-            <button name="." value={display} onClick={e => (e.target.name)} onChange={onChange}>.</button>
-            <button name="0" value={display} onClick={e => (e.target.name)} onChange={onChange}>0</button>
-            <button name="=" value={display} onClick={e => (e.target.name)} onChange={onChange}>=</button>
-            <button name="/" value={display} onClick={e => (e.target.name)} onChange={onChange}>÷</button><br />
-        </div>
-
     </>);
 }
 
