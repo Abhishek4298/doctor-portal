@@ -4,12 +4,8 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  background: linear-gradient(to right, #00aaff, #00ff6c);
-}
-
 .calculator-grid {
+  background: linear-gradient(to right, #00aaff, #00ff6c) !important;
   display: grid;
   margin-top: 2rem;
   justify-content: center;

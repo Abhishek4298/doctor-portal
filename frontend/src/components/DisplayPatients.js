@@ -47,10 +47,10 @@ const DisplayPatients = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {patient.filter(user => props.search ? (
-                                user.name?.toLowerCase()?.includes(props.search?.toLowerCase()) ||
-                                user.age?.toString()?.includes(props.search?.toLowerCase()) ||
-                                user.email?.toLowerCase()?.includes(props.search?.toLowerCase())
+                            {patient.filter(ele => props.search ? (
+                                ele.name?.toLowerCase()?.includes(props.search?.toLowerCase()) ||
+                                ele.age?.toString()?.includes(props.search?.toLowerCase()) ||
+                                ele.email?.toLowerCase()?.includes(props.search?.toLowerCase())
                             ) : true)
                                 .map((ele, index) => (
                                     <tr key={ele._id}>
