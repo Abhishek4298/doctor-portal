@@ -1,5 +1,7 @@
 import { useState } from "react";
+import AddBoxIcon from '@mui/icons-material/AddBox';
 import { Modal, Button } from 'react-bootstrap'
+import './todolist.css';
 
 const ToDOList = (props) => {
     let getFromLocalStorage = JSON.parse(localStorage.getItem('AddTaskData'))
@@ -59,9 +61,15 @@ const ToDOList = (props) => {
         isChecked ? SetIsChecked(false) : SetIsChecked(true);
     }
 
-    let checkEffect;
+    let styles = {
+        largeIcon: {
+            width: 60,
+            height: 60,
+        },
+
+    };
     if (isChecked) {
-        checkEffect = {
+        styles = {
             editIcon: {
                 opacity: '0.3',
                 pointerEvents: 'none'
@@ -77,10 +85,10 @@ const ToDOList = (props) => {
     }
 
     return (<>
-        <div className="todo-top">
-            <div className="container d-flex justify-content-center">
+        <div className="todo-top d-flex justify-content-center">
+            <div className="2w-50">
                 <div className="row">
-                    <h2>TO-DO List</h2>
+                    <h2>To-do List</h2>
                     <div className="form-floating d-flex justify-content-center">
                         <textarea
                             className="form-control"
@@ -89,7 +97,12 @@ const ToDOList = (props) => {
                             onChange={onChange}
                         ></textarea>
                         <label htmlFor="floatingTextarea">Add Task</label>
-                        <button type="button" onClick={() => manageTask()} className="btn btn-primary">Add Task</button>
+                        <AddBoxIcon
+                            style={{
+                                width: 60,
+                                height: 60,
+                            }}
+                            onClick={() => manageTask()}></AddBoxIcon>
                     </div>
 
                     <div className="mt-4">
@@ -106,14 +119,12 @@ const ToDOList = (props) => {
                                                     value={isChecked}
                                                     onChange={checkChangeHandler}
                                                     id="flexCheckDefault" />
-                                                <div className="mx-2 card w-75" style={{ width: "18rem" }}>
-                                                    <strong>
-                                                        <h5 style={checkEffect?.editText} className="mx-4">{elem}</h5>
-                                                    </strong>
+                                                <div className="mx-2 card" style={{ width: "23rem" }}>
+                                                    <h5 style={styles?.editText} className="mx-4">{elem}</h5>
                                                 </div>
                                                 <div className="mx-4d-flex">
                                                     <i
-                                                        style={checkEffect?.editIcon}
+                                                        style={styles?.editIcon}
                                                         className="fa fa-pencil-square-o"
                                                         onClick={() => handleOpen(id, elem)}
                                                         aria-hidden="true"></i>
@@ -157,6 +168,7 @@ const ToDOList = (props) => {
                                 </> :
                                 <p>No task</p>
                         }
+                        <br />
                     </div>
                 </div>
             </div>
