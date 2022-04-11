@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Modal, Button } from 'react-bootstrap'
 
-const ToDOList = () => {
+const ToDOList = (props) => {
     let getFromLocalStorage = JSON.parse(localStorage.getItem('AddTaskData'))
     const [taskList, setTaskList] = useState(getFromLocalStorage)
     const [input, setInput] = useState("")
     const [editIndex, setEditIndex] = useState(null)
     const [edit, setEdit] = useState("")
     const [show, setShow] = useState(false);
+    const [isChecked, SetIsChecked] = useState(false)
 
     // Modal Edit
     const handleClose = () => setShow(false);
@@ -16,7 +17,6 @@ const ToDOList = () => {
         setEditIndex(index);
         setEdit(task)
     }
-
     // Add Task
     let list = [];
     const manageTask = (task) => {
@@ -26,12 +26,13 @@ const ToDOList = () => {
                 list = getFromLocalStorage
             }
             if (!input) {
-                return alert("Please add Task")
+                return props.showAlert("Task can not be null", "info")
             }
             list.push(input)
             setTaskList(list)
             localStorage.setItem('AddTaskData', JSON.stringify(list));
             setInput("")
+            return props.showAlert("Task added successfully", "success")
         }
         else {
             //Edit
@@ -53,6 +54,24 @@ const ToDOList = () => {
         setTaskList(deletedData);
     }
 
+    // check change
+    const checkChangeHandler = () => {
+        isChecked ? SetIsChecked(false) : SetIsChecked(true);
+    }
+
+    let checkEffect;
+    if (isChecked) {
+        checkEffect = {
+            editIcon: {
+                opacity: '0.3',
+                pointerEvents: 'none'
+            },
+            editText: {
+                textDecoration: 'line-through'
+            }
+        }
+    }
+
     const onChange = (e) => {
         setInput(e.target.value)
     }
@@ -72,6 +91,7 @@ const ToDOList = () => {
                         <label htmlFor="floatingTextarea">Add Task</label>
                         <button type="button" onClick={() => manageTask()} className="btn btn-primary">Add Task</button>
                     </div>
+
                     <div className="mt-4">
                         {
                             (taskList?.length) ?
@@ -80,14 +100,25 @@ const ToDOList = () => {
                                     {taskList.map((elem, id) => {
                                         return (
                                             <div className="d-flex justify-content-start" key={id}>
-                                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                                <input className="form-check-input"
+                                                    type="checkbox"
+                                                    name={id}
+                                                    value={isChecked}
+                                                    onChange={checkChangeHandler}
+                                                    id="flexCheckDefault" />
                                                 <div className="mx-2 card w-75" style={{ width: "18rem" }}>
-                                                    <h5 className="mx-4">{elem}</h5>
+                                                    <strong>
+                                                        <h5 style={checkEffect?.editText} className="mx-4">{elem}</h5>
+                                                    </strong>
                                                 </div>
-                                                <div className="mx-4    d-flex">
-                                                    <i className="fa fa-pencil-square-o"
+                                                <div className="mx-4d-flex">
+                                                    <i
+                                                        style={checkEffect?.editIcon}
+                                                        className="fa fa-pencil-square-o"
                                                         onClick={() => handleOpen(id, elem)}
-                                                        aria-hidden="true" disabled></i>
+                                                        aria-hidden="true"></i>
+
+                                                    {/* Modal for Editing Task */}
                                                     <Modal show={show} onHide={handleClose}>
                                                         <Modal.Header
                                                             size="lg"
@@ -113,6 +144,7 @@ const ToDOList = () => {
                                                             </Button>
                                                         </Modal.Footer>
                                                     </Modal>
+                                                    {/* Delete Icon For Task */}
                                                     <i
                                                         onClick={() => deleteTask(elem)}
                                                         className="mx-4 fa fa-trash-o"

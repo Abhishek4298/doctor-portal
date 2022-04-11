@@ -8,7 +8,7 @@ const Calculator = () => {
         setData((str) => str ? str + num.toString() : num.toString())
     }
     const deleteButton = () => {
-        console.log("Hello");
+        setData(data.slice(0, -1))
     }
     const calculate = () => {
         if (data) {
@@ -22,7 +22,7 @@ const Calculator = () => {
             </div>
             <button onClick={() => setData("")} className="span-two">AC</button>
             <button onClick={deleteButton}>DEL</button>
-            <button onClick={() => onNumberClick("÷")}>÷</button>
+            <button onClick={() => onNumberClick("/")}>÷</button>
             <button onClick={() => onNumberClick(1)}>1</button>
             <button onClick={() => onNumberClick(2)}>2</button>
             <button onClick={() => onNumberClick(3)}>3</button>
@@ -36,7 +36,10 @@ const Calculator = () => {
             <button onClick={() => onNumberClick("-")}>-</button>
             <button onClick={() => onNumberClick(".")}>.</button>
             <button onClick={() => onNumberClick(0)}>0</button>
-            <button onClick={calculate} className="span-two">=</button>
+            <button
+                // onKeyPress={(e) => e.key === 'Enter' && calculate()}
+                onClick={calculate}
+                className="span-two">=</button>
         </div>
     </>);
 }
