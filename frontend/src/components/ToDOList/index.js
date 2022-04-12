@@ -44,21 +44,23 @@ const ToDOList = (props) => {
             localStorage.setItem('AddTaskData', JSON.stringify(updatedList));
             setEdit("")
             setShow(false)
+            return props.showAlert("Task Updated successfully", "success")
         }
     }
 
     // Delete Task
-    const deleteTask = (task) => {
-        const deletedData = taskList.filter((el) => {
-            return task !== el
+    const deleteTask = (index) => {
+        const deletedData = taskList.filter((el, i) => {
+            return index !== i
         });
         localStorage.setItem('AddTaskData', JSON.stringify(deletedData));
         setTaskList(deletedData);
+        return props.showAlert("Task deleted successfully", "success")
     }
 
     // check change
-    const checkChangeHandler = () => {
-        isChecked ? SetIsChecked(false) : SetIsChecked(true);
+    const checkChangeHandler = (checkData, task) => {
+        checkData ? SetIsChecked(false) : SetIsChecked(true);
     }
 
     let styles = {
@@ -88,7 +90,9 @@ const ToDOList = (props) => {
         <div className="todo-top d-flex justify-content-center">
             <div className="2w-50">
                 <div className="row">
-                    <h2>To-do List</h2>
+                    <h2 style={{
+                        textDecoration: "underline"
+                    }}>To-do List</h2>
                     <div className="form-floating d-flex justify-content-center">
                         <textarea
                             className="form-control"
@@ -117,7 +121,7 @@ const ToDOList = (props) => {
                                                     type="checkbox"
                                                     name={id}
                                                     value={isChecked}
-                                                    onChange={checkChangeHandler}
+                                                    onChange={() => checkChangeHandler(isChecked, elem)}
                                                     id="flexCheckDefault" />
                                                 <div className="mx-2 card" style={{ width: "23rem" }}>
                                                     <h5 style={styles?.editText} className="mx-4">{elem}</h5>
@@ -157,7 +161,7 @@ const ToDOList = (props) => {
                                                     </Modal>
                                                     {/* Delete Icon For Task */}
                                                     <i
-                                                        onClick={() => deleteTask(elem)}
+                                                        onClick={() => deleteTask(id)}
                                                         className="mx-4 fa fa-trash-o"
                                                         aria-hidden="true"
                                                     ></i>
