@@ -21,8 +21,8 @@ const ToDOList = (props) => {
     }
     // Add Task
     let list = [];
-    const manageTask = (task) => {
-        if (!task) {
+    const manageTask = (index) => {
+        if (!index) {
             // Add
             if (getFromLocalStorage) {
                 list = getFromLocalStorage
@@ -154,7 +154,7 @@ const ToDOList = (props) => {
                                                             <Button variant="secondary" onClick={handleClose}>
                                                                 cancel
                                                             </Button>
-                                                            <Button variant="primary" onClick={() => manageTask(elem)}>
+                                                            <Button variant="primary" onClick={() => manageTask(id)}>
                                                                 Save
                                                             </Button>
                                                         </Modal.Footer>
