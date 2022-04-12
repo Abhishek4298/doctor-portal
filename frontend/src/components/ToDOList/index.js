@@ -11,6 +11,7 @@ const ToDOList = (props) => {
     const [edit, setEdit] = useState("")
     const [show, setShow] = useState(false);
     const [isChecked, SetIsChecked] = useState(false)
+    const [crossLine, setCrossLine] = useState({})
 
     // Modal Edit
     const handleClose = () => setShow(false);
@@ -58,27 +59,32 @@ const ToDOList = (props) => {
         return props.showAlert("Task deleted successfully", "success")
     }
 
-    // check change
-    const checkChangeHandler = (checkData, task) => {
-        checkData ? SetIsChecked(false) : SetIsChecked(true);
-    }
-
     let styles = {
         largeIcon: {
             width: 60,
             height: 60,
         },
-
     };
+    // check change
+    const checkChangeHandler = (checkData, index) => {
+        checkData ? SetIsChecked(false) : SetIsChecked(true);
+        console.log("======> :: index", index);
+        if (!checkData) {
+            setCrossLine({ textDecoration: 'line-through' })
+        }
+        else {
+            setCrossLine({ textDecoration: 'none' })
+        }
+    }
+    if (crossLine) {
+        console.log("======> :: crollLine", crossLine);
+    }
     if (isChecked) {
         styles = {
             editIcon: {
                 opacity: '0.3',
                 pointerEvents: 'none'
             },
-            editText: {
-                textDecoration: 'line-through'
-            }
         }
     }
 
@@ -119,12 +125,12 @@ const ToDOList = (props) => {
                                             <div className="d-flex justify-content-start" key={id}>
                                                 <input className="form-check-input"
                                                     type="checkbox"
-                                                    name={id}
-                                                    value={isChecked}
-                                                    onChange={() => checkChangeHandler(isChecked, elem)}
+                                                    name="checkBOX"
+                                                    value={id}
+                                                    onChange={() => checkChangeHandler(isChecked, id)}
                                                     id="flexCheckDefault" />
                                                 <div className="mx-2 card" style={{ width: "23rem" }}>
-                                                    <h5 style={styles?.editText} className="mx-4">{elem}</h5>
+                                                    <h5 style={crossLine} className="mx-4">{elem}</h5>
                                                 </div>
                                                 <div className="mx-4d-flex">
                                                     <i

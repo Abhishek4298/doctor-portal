@@ -2,7 +2,7 @@ import React from 'react'
 
 const Alert = ({ alert }) => {
     return (
-        <>]
+        <>
             <div className="mt-5" >
                 <div style={{ width: '100%' }}>
                     <div className="m-5" style={{ height: "70px" }}>

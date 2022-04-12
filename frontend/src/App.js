@@ -18,6 +18,7 @@ import Layout from "./components/Layout";
 import GoogleAUTH from "./components/Authorization/GoogleAUth";
 import Calculator from "./components/Calculator/index";
 import ToDOList from "./components/ToDOList/index";
+import ContactUs from "./components/common/ContactUs";
 require('./App.css')
 
 function App() {
@@ -89,6 +90,11 @@ function App() {
             path="/calculator"
             element={<Calculator />}
           />
+          <Route
+            path="/contact-us"
+            element={
+              <ContactUs />}
+          />
           <Route element={<RequireAuth authUser={isToken} />} >
             <Route
               path="/home"
@@ -116,6 +122,7 @@ function App() {
               element={
                 <DisplayPatients search={search} theme={theme} showAlert={showAlert} />}
             />
+
           </Route>
         </Route>
       </Routes>
