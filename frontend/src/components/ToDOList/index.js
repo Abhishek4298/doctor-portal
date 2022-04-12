@@ -57,31 +57,12 @@ const ToDOList = (props) => {
     return props.showAlert("Task deleted successfully", "success");
   };
 
-  let styles = {
-    largeIcon: {
-      width: 60,
-      height: 60,
-    },
-  };
   // check change
   const checkChangeHandler = (checkData, index) => {
-    console.log(
-      "🚀 ~ file: index.js ~ line 69 ~ checkChangeHandler ~ checkData",
-      checkData
-    );
     let updatedChecked = [...isChecked];
     updatedChecked[index] = checkData;
     setIsChecked(updatedChecked);
   };
-
-  if (isChecked) {
-    styles = {
-      editIcon: {
-        opacity: "0.3",
-        pointerEvents: "none",
-      },
-    };
-  }
 
   const onChange = (e) => {
     setInput(e.target.value);
@@ -105,7 +86,6 @@ const ToDOList = (props) => {
                 id="floatingTextarea"
                 value={input}
                 onChange={onChange}
-                style={{ width: "50%" }}
                 placeholder="abcd"
               ></textarea>
               <label htmlFor="floatingTextarea">Add Task</label>
@@ -138,9 +118,8 @@ const ToDOList = (props) => {
                         <div className="mx-2 card" style={{ width: "23rem" }}>
                           <h5
                             style={{
-                              textDecoration: `${
-                                isChecked[id] ? "line-through" : "none"
-                              }`,
+                              textDecoration: `${isChecked[id] ? "line-through" : "none"
+                                }`,
                             }}
                             className="mx-4"
                           >
@@ -151,9 +130,8 @@ const ToDOList = (props) => {
                           <i
                             style={{
                               opacity: `${isChecked[id] ? "0.3" : "1"}`,
-                              pointerEvents: `${
-                                isChecked[id] ? "none" : "all"
-                              }`,
+                              pointerEvents: `${isChecked[id] ? "none" : "all"
+                                }`,
                             }}
                             className="fa fa-pencil-square-o"
                             onClick={() => handleOpen(id, elem)}

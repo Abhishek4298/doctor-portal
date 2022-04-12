@@ -43,7 +43,7 @@ exports.register = async (req, res) => {
     const authToken = jwt.sign(patient, process.env.JWT_SECRET, {
       expiresIn: '24h'
     })
-    res.json({ authToken })
+    res.status(200).json({ authToken });
   } catch (error) {
     if (error.name == 'ValidationError') {
       if (error.errors.name) {
