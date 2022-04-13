@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './style.css';
 
 const ContactUs = () => {
-  const [details, setDetails] = useState({ name: "", email: "", position: "", password: "", gender: "" })
+  const [details, setDetails] = useState({ name: "", email: "", position: "", password: "", confPass: "", gender: "" })
   const [error, setError] = useState({})
 
   const onChange = (e) => {
@@ -46,7 +46,6 @@ const ContactUs = () => {
 
     // Password Validate
     if (!values.password) {
-
       updatedError.password = "Password is required"
     }
     else {
@@ -54,6 +53,16 @@ const ContactUs = () => {
         updatedError.password = "Password must be of 4 characters"
         :
         updatedError.password = ""
+    }
+
+    // Confirm Password Validate
+    if (!values.confPass) {
+      updatedError.confPass = "confPass is required"
+    } else {
+      values.confPass !== values.password ?
+        updatedError.confPass = "Should be same as confirm password"
+        :
+        updatedError.confPass = ""
     }
 
     // Postion Validate
@@ -127,8 +136,17 @@ const ContactUs = () => {
                         onBlur={onBlur}
                         className="form-control" type="password" placeholder="Password" autoComplete="on" />
                       <div className="valid-feedback">Password field is valid!</div>
-                      <div className="invalid-feedback">Password field cannot be blank!</div>
                       <span className='error'>{error?.password}</span>
+                    </div>
+                    <div className="col-md-12">
+                      <input
+                        name="confPass"
+                        value={details.confPass}
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        className="form-control" type="password" placeholder="confPass" autoComplete="on" />
+                      <div className="valid-feedback">Confirm Password field is valid!</div>
+                      <span className='error'>{error?.confPass}</span>
                     </div>
 
                     <div className="col-md-12 mt-3">
