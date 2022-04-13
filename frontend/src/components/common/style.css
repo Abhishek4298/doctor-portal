@@ -148,3 +148,11 @@
   font-size: 0.625em;
   display: relative;
 }
+
+.outputResult {
+  width: 30%;
+  cursor: not-allowed;
+  user-select: none;
+  background: transparent;
+  color: white;
+}

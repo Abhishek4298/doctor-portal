@@ -116,15 +116,8 @@ const ToDOList = (props) => {
                           id="flexCheckDefault"
                         />
                         <div className="mx-2 card" style={{ width: "23rem" }}>
-                          <h5
-                            style={{
-                              textDecoration: `${isChecked[id] ? "line-through" : "none"
-                                }`,
-                            }}
-                            className="mx-4"
-                          >
-                            {elem}
-                          </h5>
+                          <h5 style={{ textDecoration: `${isChecked[id] ? "line-through" : "none"}` }}
+                            className="mx-4">{elem}</h5>
                         </div>
                         <div className="mx-4d-flex">
                           <i
