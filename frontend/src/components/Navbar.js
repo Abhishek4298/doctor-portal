@@ -45,6 +45,9 @@ const NavbarLink = (props) => {
                         <NavDropdown.Item>
                             <Link to="/contact-us" className="nav-link">Contact Us</Link>
                         </NavDropdown.Item>
+                        <NavDropdown.Item>
+                            <Link to="/reducerDemo" className="nav-link">Reducer</Link>
+                        </NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 <div style={{

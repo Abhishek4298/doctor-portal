@@ -19,6 +19,7 @@ import GoogleAUTH from "./components/Authorization/GoogleAUth";
 import Calculator from "./components/Calculator/index";
 import ToDOList from "./components/ToDOList/index";
 import ContactUs from "./components/common/ContactUs";
+import ReducerDemo from "./components/ReducerDemo";
 require('./App.css')
 
 function App() {
@@ -94,6 +95,11 @@ function App() {
             path="/contact-us"
             element={
               <ContactUs />}
+          />
+          <Route
+            path="/reducerDemo"
+            element={
+              <ReducerDemo />}
           />
           <Route element={<RequireAuth authUser={isToken} />} >
             <Route

@@ -87,7 +87,6 @@ const ContactUs = () => {
         <div className="form-body">
           <div className="row">
             <div className="form-holder">
-              <pre className='outputResult'>{JSON.stringify(details, undefined, 2)}</pre>
               <div className="form-content">
                 <div className="form-items">
                   <h3>Contact Us</h3>
@@ -202,6 +201,10 @@ const ContactUs = () => {
             </div>
           </div>
         </div>
+        <div className='d-flex justify-content-center align-items-center'>
+          <pre className='outputResult'>{JSON.stringify(details, undefined, 2)}</pre>
+        </div>
+
       </div>
     </>);
 }
