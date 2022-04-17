@@ -48,6 +48,9 @@ const NavbarLink = (props) => {
                         <NavDropdown.Item>
                             <Link to="/reducerDemo" className="nav-link">Reducer</Link>
                         </NavDropdown.Item>
+                        <NavDropdown.Item>
+                            <Link to="/reduxDemo" className="nav-link">Redux</Link>
+                        </NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 <div style={{

@@ -20,6 +20,7 @@ import Calculator from "./components/Calculator/index";
 import ToDOList from "./components/ToDOList/index";
 import ContactUs from "./components/common/ContactUs";
 import ReducerDemo from "./components/ReducerDemo";
+import ReduxDemo from "./Redux/index";
 require('./App.css')
 
 function App() {
@@ -100,6 +101,11 @@ function App() {
             path="/reducerDemo"
             element={
               <ReducerDemo />}
+          />
+          <Route
+            path="/reduxDemo"
+            element={
+              <ReduxDemo />}
           />
           <Route element={<RequireAuth authUser={isToken} />} >
             <Route
