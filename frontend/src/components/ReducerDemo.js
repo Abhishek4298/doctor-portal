@@ -1,16 +1,27 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
+import axios from "axios";
 
-const initialData = 0;
+const initialData = {
+  number: 0,
+  marks: 50
+}
+
 const reducer = (state, action) => {
-  switch (action) {
+  switch (action.type) {
     case 'add':
-      return state + 1;
+      return { ...state, number: state.number + action.payload }
 
     case 'substract':
-      return state - 1;
+      return { ...state, number: state.number - action.payload }
 
     case 'reset':
       return initialData;
+
+    case 'MarkAdd':
+      return { ...state, marks: state.marks + action.payload }
+
+    case 'API_ERROR':
+      return { ...state, error: 'Something Went Wrong while fetching the api!' }
 
     default:
       return state;
@@ -18,17 +29,48 @@ const reducer = (state, action) => {
 }
 const ReducerDemo = () => {
   const [count, dispatch] = useReducer(reducer, initialData)
+  const [articleList, setArticle] = useState([]);
+
+  useEffect(() => {
+    const url = 'https://jsonplaceholder.typicode.com/users';
+    axios.get(url)
+      .then(response => {
+        setArticle(response.data)
+      })
+      .catch(error => {
+        console.log("===> :: error", error);
+        dispatch({ type: 'API_ERROR' })
+      })
+  }, [])
 
   return (<>
-    <div className="container d-flex align-items-center justify-content-center">
-      <div className="row">
-        {count}
-        <button type="button" onClick={() => dispatch('add')} className="btn btn-primary">+</button>
-        <button type="button" onClick={() => dispatch('substract')} className="btn btn-primary">-</button>
-        <button type="button" onClick={() => dispatch('reset')} className="btn btn-primary">Reset</button>
-      </div>
-    </div>
+    <div className="container">
+      <h1>{count.error ? count.error : null}</h1>
 
+      <div>
+        Number: - {count.number}
+        <button type="button" onClick={() => dispatch({ type: 'add', payload: 5 })} >+</button>
+        <button type="button" onClick={() => dispatch({ type: 'substract', payload: 1 })} >-</button>
+        <button type="button" onClick={() => dispatch({ type: 'reset' })} >Reset</button>
+      </div >
+      <div>
+        Marks: - {count.marks}
+        <button onClick={() => dispatch({ type: 'MarkAdd', payload: 10 })}>Marks Add</button>
+      </div>
+
+      <div>
+        {console.log("===> :: articleList", articleList)}
+        {
+          articleList && articleList.map((el) => {
+            return <>
+              <div key={el.id}>
+                <h2>{el.name}</h2>
+              </div>
+            </>
+          })
+        }
+      </div>
+    </div >
   </>);
 }
 
