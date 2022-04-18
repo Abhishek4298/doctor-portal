@@ -22,6 +22,7 @@ import ContactUs from "./components/common/ContactUs";
 import ReducerDemo from "./components/ReducerDemo";
 import ReduxDemo from "./Redux/index";
 import Restaurant_Mng from "./Restaurant_Mng/index";
+import StateManagement from "./components/StateManagement";
 
 require('./App.css')
 
@@ -113,6 +114,11 @@ function App() {
             path="/storeMngt"
             element={
               <Restaurant_Mng />}
+          />
+          <Route
+            path="/stateMngt"
+            element={
+              <StateManagement />}
           />
           <Route element={<RequireAuth authUser={isToken} />} >
             <Route

@@ -10,7 +10,6 @@ import store from './Redux/store';
 import { Provider } from "react-redux";
 
 store.subscribe(() => console.log(store.getState()));
-console.log("===> :: store", store);
 
 ReactDOM.render(
   <React.StrictMode>
