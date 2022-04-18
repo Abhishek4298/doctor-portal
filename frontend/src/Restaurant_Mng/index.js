@@ -4,16 +4,29 @@ import './styls.css'
 const StoreManagement = () => {
   const myState = useSelector((state) => state.UpdateFoodByDateTimer);
   const dispatch = useDispatch();
-  const defineDate = new Date();
   return (<>
-    <div className="redux-top">
-      <h1>Select Time</h1>
-      <div>
-        {/* <h2>{defineDate}</h2> */}
+    <div className="d-flex justify-content-center">
+      <h2>Cafe Coffee Day</h2>
+    </div>
+    <div className="container">
+      <div className="row">
+        <div className="col">Items</div>
+        <div className="col"> Time to Prepare</div>
+        <div className="col"> Action</div>
+        <div className="w-100"></div>
+        <div className="col">Cold Cofee</div>
+        <div className="col">0.3 mins</div>
+        <div className="col">15 Min</div>
         <button type="button"
           onClick={() => dispatch(addFoodTimer())}
-          className="mx-2 btn btn-primary">Add 10 mins</button>
-        <h2 className="mt-5">List of Food Items</h2>
+          className="btn btn-primary btn-sm">Order</button>
+        <div className="w-100 mb-5"></div>
+        <div className="col">Cold Cofee</div>
+        <div className="col">0.3 mins</div>
+        <div className="col">15 Min</div>
+        <button type="button"
+          onClick={() => dispatch(addFoodTimer())}
+          className="btn btn-primary btn-sm">Order</button>
       </div>
     </div>
   </>);

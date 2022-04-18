@@ -1,10 +1,9 @@
-const initialState = new Date();
+const initialState = 0;
 
 const UpdateFoodByDateTimer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_FOOD_TIMER": {
       console.log("-------ADD_FOOD_TIMER---------------", state);
-      alert("sddssd")
       return state + 1
     };
 
