@@ -21,6 +21,8 @@ import ToDOList from "./components/ToDOList/index";
 import ContactUs from "./components/common/ContactUs";
 import ReducerDemo from "./components/ReducerDemo";
 import ReduxDemo from "./Redux/index";
+import Restaurant_Mng from "./Restaurant_Mng/index";
+
 require('./App.css')
 
 function App() {
@@ -107,6 +109,11 @@ function App() {
             element={
               <ReduxDemo />}
           />
+          <Route
+            path="/storeMngt"
+            element={
+              <Restaurant_Mng />}
+          />
           <Route element={<RequireAuth authUser={isToken} />} >
             <Route
               path="/home"
@@ -134,7 +141,6 @@ function App() {
               element={
                 <DisplayPatients search={search} theme={theme} showAlert={showAlert} />}
             />
-
           </Route>
         </Route>
       </Routes>
