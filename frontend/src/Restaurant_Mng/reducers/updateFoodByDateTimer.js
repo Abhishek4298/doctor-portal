@@ -1,4 +1,4 @@
-const initialState = 0;
+const initialState = new Date();
 
 const UpdateFoodByDateTimer = (state = initialState, action) => {
   switch (action.type) {

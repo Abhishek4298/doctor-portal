@@ -6,7 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './context/AuthProvider';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import store from './Redux/store';
+import store from './Restaurant_Mng/store';
+// import store from './Redux/store';
 import { Provider } from "react-redux";
 
 store.subscribe(() => console.log(store.getState()));
