@@ -6,7 +6,8 @@ const StateManagement = () => {
     name: "", email: "", position: "", password: "", confPass: "", gender: "",
     schoolMarks: "", collegeGrade: ""
   })
-  const [nextPage, setNextPage] = useState(0)
+
+  const [nextPage, setNextPage] = useState(true)
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -17,12 +18,11 @@ const StateManagement = () => {
     alert(JSON.stringify(details));
   }
   const nextPageHandler = () => {
-    setNextPage(true)
-    console.log(nextPage);
+    setNextPage(curr => !curr)
   }
 
   return (<>
-    <h2>State Management</h2>
+    <h2 className="text-center">State Management</h2>
     <div className='state-top'>
       <div className="form-body">
         <div className="row">
@@ -58,7 +58,6 @@ const StateManagement = () => {
                           name="position"
                           value={details.position}
                           onChange={onChange}
-
                           className="form-select mt-3" >
                           <option value="">Select Reference</option>
                           <option value="Friends">Friends</option>
@@ -80,7 +79,6 @@ const StateManagement = () => {
                           name="confPass"
                           value={details.confPass}
                           onChange={onChange}
-
                           className="form-control" type="password" placeholder="confPass" autoComplete="on" />
                         <div className="valid-feedback">Confirm Password field is valid!</div>
                       </div>
@@ -90,12 +88,10 @@ const StateManagement = () => {
                           type="radio"
                           value="male"
                           onChange={onChange}
-
                           name="gender"
                           className="btn-check"
                           id="male" autoComplete="off" />
                         <label className="btn btn-sm btn-outline-secondary" htmlFor="male">Male</label>
-
                         <input type="radio"
                           value="female"
                           onChange={onChange}
@@ -125,7 +121,6 @@ const StateManagement = () => {
                     </>
                     :
                     <>
-                      <h2>Hee</h2>
                       <div className="col-md-12">
                         <input
                           name="schoolMarks"
@@ -144,21 +139,21 @@ const StateManagement = () => {
                   }
                   {nextPage
                     ?
-                    <>
+                    <div>
                       <div className="form-button mt-3">
                         <button id="submit" type="submit" className="btn btn-primary" disabled>Submit</button>
                       </div>
                       <div className="form-button mt-3">
-                        <button onClick={nextPageHandler} type="button" className="btn btn-primary">Add Education</button>
+                        <button onClick={nextPageHandler} type="button" className="btn btn-primary">Next</button>
                       </div>
-                    </>
+                    </div>
                     :
                     <>
                       <div className="form-button mt-3">
                         <button id="submit" type="submit" className="btn btn-primary">Submit</button>
                       </div>
                       <div className="form-button mt-3">
-                        <button id="submit" type="submit" onClick={setNextPage(true)} className="btn btn-primary">Previos Page</button>
+                        <button id="submit" type="button" onClick={nextPageHandler} className="btn btn-primary">Previos Page</button>
                       </div>
                     </>
                   }
