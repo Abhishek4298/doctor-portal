@@ -1,13 +1,17 @@
-import { useTimer } from "use-timer";
+import { useTimer } from 'react-timer-hook';
 import { useSelector, useDispatch } from "react-redux";
 import { addFoodTimer, deleteFoodTimer } from "./actions/index";
 import './styls.css'
 
 const StoreManagement = () => {
-  const { time, start, pause, reset, status } = useTimer({
-    initialTime: 100,
-    timerType: 'DECREMENTAL',
-  });
+
+  const {
+    seconds,
+    minutes,
+    hours,
+    isRunning,
+    start,
+  } = useTimer({ onExpire: () => console.warn('onExpire called') });
 
   const myState = useSelector((state) => state.UpdateFoodByDateTimer);
   const dispatch = useDispatch();
@@ -32,8 +36,8 @@ const StoreManagement = () => {
         <div className="col">0.3 mins</div>
         <div className="col">15 Min</div>
         <button type="button"
-          // onClick={() => dispatch(addFoodTimer())}
-          onClick={start}
+          onClick={() => dispatch(addFoodTimer())}
+          // onClick={start}
           className="mb-5 btn btn-primary btn-sm">Order</button>
       </div>
       <div className="w-100 mb-5"></div>
@@ -41,8 +45,7 @@ const StoreManagement = () => {
         <div className="col">
           <p>Time to prepare order:</p>
         </div>
-        <p>{time}</p>
-        {status === "RUNNING" && <p>Running...</p>}
+        <p>{minutes}:{seconds}</p>
       </div>
     </div>
   </>);
