@@ -24,6 +24,7 @@ import ReduxDemo from "./Redux/index";
 import Restaurant_Mng from "./Restaurant_Mng/index";
 import StateManagement from "./components/StateManagement";
 import ReusableComponent from "./components/ReusableComponent";
+import ReactTableDemo from "./components/ReactTableDemo";
 
 require('./App.css')
 
@@ -126,7 +127,11 @@ function App() {
             element={
               <ReusableComponent />}
           />
-
+          <Route
+            path="/reactTable"
+            element={
+              <ReactTableDemo />}
+          />
           <Route element={<RequireAuth authUser={isToken} />} >
             <Route
               path="/home"

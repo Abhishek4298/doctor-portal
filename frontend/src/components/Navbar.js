@@ -60,6 +60,9 @@ const NavbarLink = (props) => {
                         <NavDropdown.Item>
                             <Link to="/reusableComponent" className="nav-link">Reusable Component</Link>
                         </NavDropdown.Item>
+                        <NavDropdown.Item>
+                            <Link to="/reactTable" className="nav-link">React Table</Link>
+                        </NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 <div style={{
