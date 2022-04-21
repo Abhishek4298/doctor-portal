@@ -14,6 +14,6 @@ const Button = styled.button`
   font-size: 16px;
 `;
 
-export const ReusableButton = ({ children }) => {
-  return (<Button>{children}</ Button>);
+export const ReusableButton = ({ children, className }) => {
+  return (<Button className={className}>{children}</ Button>);
 };
