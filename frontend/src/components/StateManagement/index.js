@@ -2,24 +2,39 @@ import { useState } from "react";
 import './style.css';
 
 const StateManagement = () => {
-  const [details, setDetails] = useState({
-    name: "", email: "", position: "", password: "", confPass: "", gender: "",
-    schoolMarks: "", collegeGrade: ""
-  })
-
   const [nextPage, setNextPage] = useState(true)
+  const [personalDetails, setPersonalDetails] = useState({
+    name: "", email: "", position: "", password: "", confPass: "", gender: "",
+  })
+  const [educationDetails, setEducationDetails] = useState([{
+    schoolMarks: "", collegeGrade: ""
+  }])
 
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setDetails({ ...details, [name]: value })
-  }
-  const submitHandler = (e) => {
-    e.preventDefault();
-    alert(JSON.stringify(details));
-  }
+  // Page Changes
   const nextPageHandler = () => {
     setNextPage(curr => !curr)
   }
+
+  // onChange
+  const onPersonalDetailsChange = (e) => {
+    const { name, value } = e.target;
+    setPersonalDetails(
+      { ...personalDetails, [name]: value }
+    )
+  }
+  const onEducationalDetailsChange = (e) => {
+    const { name, value } = e.target;
+    setEducationDetails({
+      educationDetails: { [name]: value }
+    })
+  }
+
+  // submitHandler
+  const submitHandler = (e) => {
+    e.preventDefault();
+    alert(JSON.stringify(personalDetails));
+  }
+
 
   return (<>
     <h2 className="text-center">State Management</h2>
@@ -40,24 +55,24 @@ const StateManagement = () => {
                       <div className="col-md-12">
                         <input
                           name="name"
-                          value={details.name}
-                          onChange={onChange}
+                          value={personalDetails.name}
+                          onChange={onPersonalDetailsChange}
 
                           className="form-control" type="text" placeholder="Full Name" />
                       </div>
                       <div className="col-md-12">
                         <input
                           name="email"
-                          value={details.email}
-                          onChange={onChange}
+                          value={personalDetails.email}
+                          onChange={onPersonalDetailsChange}
 
                           className="form-control" type="text" placeholder="E-mail Address" />
                       </div>
                       <div className="col-md-12">
                         <select
                           name="position"
-                          value={details.position}
-                          onChange={onChange}
+                          value={personalDetails.position}
+                          onChange={onPersonalDetailsChange}
                           className="form-select mt-3" >
                           <option value="">Select Reference</option>
                           <option value="Friends">Friends</option>
@@ -68,8 +83,8 @@ const StateManagement = () => {
                       <div className="col-md-12">
                         <input
                           name="password"
-                          value={details.password}
-                          onChange={onChange}
+                          value={personalDetails.password}
+                          onChange={onPersonalDetailsChange}
 
                           className="form-control" type="password" placeholder="Password" autoComplete="on" />
                         <div className="valid-feedback">Password field is valid!</div>
@@ -77,8 +92,8 @@ const StateManagement = () => {
                       <div className="col-md-12">
                         <input
                           name="confPass"
-                          value={details.confPass}
-                          onChange={onChange}
+                          value={personalDetails.confPass}
+                          onChange={onPersonalDetailsChange}
                           className="form-control" type="password" placeholder="confPass" autoComplete="on" />
                         <div className="valid-feedback">Confirm Password field is valid!</div>
                       </div>
@@ -87,14 +102,14 @@ const StateManagement = () => {
                         <input
                           type="radio"
                           value="male"
-                          onChange={onChange}
+                          onChange={onPersonalDetailsChange}
                           name="gender"
                           className="btn-check"
                           id="male" autoComplete="off" />
                         <label className="btn btn-sm btn-outline-secondary" htmlFor="male">Male</label>
                         <input type="radio"
                           value="female"
-                          onChange={onChange}
+                          onChange={onPersonalDetailsChange}
                           name="gender"
                           className="btn-check"
                           id="female" autoComplete="off" />
@@ -102,7 +117,7 @@ const StateManagement = () => {
                         <input
                           type="radio"
                           value="other"
-                          onChange={onChange}
+                          onChange={onPersonalDetailsChange}
                           name="gender"
                           className="btn-check"
                           id="secret" autoComplete="off" />
@@ -124,17 +139,23 @@ const StateManagement = () => {
                       <div className="col-md-12">
                         <input
                           name="schoolMarks"
-                          value={details.schoolMarks}
-                          onChange={onChange}
+                          value={educationDetails.schoolMarks}
+                          onChange={onEducationalDetailsChange}
                           className="form-control" type="text" placeholder="Enter 10th Marks" />
                       </div>
                       <div className="col-md-12">
                         <input
                           name="collegeGrade"
-                          value={details.collegeGrade}
-                          onChange={onChange}
+                          value={educationDetails.collegeGrade}
+                          onChange={onEducationalDetailsChange}
                           className="form-control" type="text" placeholder="Enter last semester grade" />
                       </div>
+                      <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={() => setEducationDetails(" ")}
+                      >
+                        Cancel</button>
                     </>
                   }
                   {nextPage
@@ -164,7 +185,8 @@ const StateManagement = () => {
         </div>
       </div>
       <div className='d-flex justify-content-center align-items-center'>
-        <pre className='outputResult'>{JSON.stringify(details, undefined, 2)}</pre>
+        <pre className='outputResult'>{JSON.stringify(personalDetails, undefined, 2)}</pre>
+        <pre className='outputResult'>{JSON.stringify(educationDetails, undefined, 2)}</pre>
       </div>
     </div>
   </>);
