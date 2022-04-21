@@ -23,6 +23,7 @@ import ReducerDemo from "./components/ReducerDemo";
 import ReduxDemo from "./Redux/index";
 import Restaurant_Mng from "./Restaurant_Mng/index";
 import StateManagement from "./components/StateManagement";
+import ReusableComponent from "./components/ReusableComponent";
 
 require('./App.css')
 
@@ -120,6 +121,12 @@ function App() {
             element={
               <StateManagement />}
           />
+          <Route
+            path="/reusableComponent"
+            element={
+              <ReusableComponent />}
+          />
+
           <Route element={<RequireAuth authUser={isToken} />} >
             <Route
               path="/home"

@@ -57,6 +57,9 @@ const NavbarLink = (props) => {
                         <NavDropdown.Item>
                             <Link to="/stateMngt" className="nav-link">State Management</Link>
                         </NavDropdown.Item>
+                        <NavDropdown.Item>
+                            <Link to="/reusableComponent" className="nav-link">Reusable Component</Link>
+                        </NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 <div style={{
