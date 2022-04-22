@@ -21,7 +21,6 @@ const BasicTable = () => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    footerGroups,
     rows,
     prepareRow,
     state,

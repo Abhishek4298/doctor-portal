@@ -22,13 +22,22 @@ const StateManagement = () => {
       { ...personalDetails, [name]: value }
     )
   }
-  const onEducationalDetailsChange = (e) => {
-    const { name, value } = e.target;
-    setEducationDetails({
-      educationDetails: { [name]: value }
+  const addEducation = () => {
+    const updatedEducationalDetail = [
+      ...educationDetails
+    ]
+    updatedEducationalDetail.push({
+      schoolMarks: "",
+      collegeGrade: "",
     })
+    setEducationDetails(updatedEducationalDetail);
   }
-
+  const onEducationalDetailsChange = (e, index) => {
+    const { name, value } = e.target;
+    const updatedEducationalDetail = [...educationDetails];
+    updatedEducationalDetail[index][name] = value
+    setEducationDetails(updatedEducationalDetail);
+  }
   // submitHandler
   const submitHandler = (e) => {
     e.preventDefault();
@@ -136,26 +145,39 @@ const StateManagement = () => {
                     </>
                     :
                     <>
-                      <div className="col-md-12">
-                        <input
-                          name="schoolMarks"
-                          value={educationDetails.schoolMarks}
-                          onChange={onEducationalDetailsChange}
-                          className="form-control" type="text" placeholder="Enter 10th Marks" />
-                      </div>
-                      <div className="col-md-12">
-                        <input
-                          name="collegeGrade"
-                          value={educationDetails.collegeGrade}
-                          onChange={onEducationalDetailsChange}
-                          className="form-control" type="text" placeholder="Enter last semester grade" />
-                      </div>
+                      {
+                        educationDetails.map((el, index) => {
+                          return (
+                            <div key={index}>
+                              <div className="col-md-12">
+                                <input
+                                  name="schoolMarks"
+                                  value={el.schoolMarks}
+                                  onChange={(e) => onEducationalDetailsChange(e, index)}
+                                  className="form-control" type="text" placeholder="Enter 10th Marks" />
+                              </div>
+                              <div className="col-md-12">
+                                <input
+                                  name="collegeGrade"
+                                  value={el.collegeGrade}
+                                  onChange={(e) => onEducationalDetailsChange(e, index)}
+                                  className="form-control" type="text" placeholder="Enter last semester grade" />
+                              </div>
+                            </div>)
+                        })
+                      }
                       <button
                         type="button"
                         className="btn btn-danger"
-                        onClick={() => setEducationDetails(" ")}
+                        onClick={() => setEducationDetails()}
                       >
                         Cancel</button>
+                      <button
+                        type="button"
+                        className="mx-2 btn btn-primary"
+                        onClick={() => addEducation()}
+                      >
+                        Add</button>
                     </>
                   }
                   {nextPage
