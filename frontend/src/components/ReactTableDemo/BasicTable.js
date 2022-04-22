@@ -34,6 +34,7 @@ const BasicTable = () => {
     pageOptions,
     gotoPage,
     pageCount,
+    setPageSize,
   } = useTable(
     {
       columns,
@@ -46,7 +47,7 @@ const BasicTable = () => {
     useSortBy,
     usePagination
   )
-  const { globalFilter, pageIndex } = state
+  const { globalFilter, pageIndex, pageSize } = state
   return (
     <>
       <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
@@ -114,6 +115,15 @@ const BasicTable = () => {
             style={{ width: '50px' }}
           />
         </span>{' '}
+        <select
+          value={pageSize}
+          onChange={e => setPageSize(Number(e.target.value))}>
+          {[10, 25, 50].map(pageSize => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
       </div>
     </>
   )
