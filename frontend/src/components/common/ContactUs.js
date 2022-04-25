@@ -4,15 +4,15 @@ import './style.css';
 const ContactUs = () => {
   const [details, setDetails] = useState({ name: "", email: "", position: "", password: "", confPass: "", gender: "" })
   const [error, setError] = useState({})
-
   const onChange = (e) => {
     const { name, value } = e.target;
     setDetails({ ...details, [name]: value })
   }
 
   // Errror handline at onBlur
-  const onBlur = () => {
-    setError(validateError(details))
+  const onBlur = (e) => {
+    const { name, value } = e.target;
+    setError(validateError(name, value))
   }
 
   const submitHandler = (e) => {
@@ -20,63 +20,73 @@ const ContactUs = () => {
     alert(JSON.stringify(details));
   }
 
-  const validateError = (values) => {
+  const validateError = (name, value) => {
     let updatedError = { ...error }
-    const mailFormate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const mailFormate = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,15}/g;
 
-    if (!values.name) {
-      updatedError.name = "Name is required"
+    if (name === "name") {
+      if (!value) {
+        console.log("===> :: updatedError[name] ", updatedError[name]);
+        updatedError[name] = "Name is required"
+      }
+      else {
+        value.length < 5 ?
+          updatedError[name] = "Name character should be greate 5 character"
+          :
+          updatedError[name] = ""
+      }
     }
-    else {
-      values.name.length < 5 ?
-        updatedError.name = "Name character should be greate 5 character"
-        :
-        updatedError.name = ""
-    }
-
     // Email Validate
-    if (!values.email) {
-      updatedError.email = "Email is required"
+    else if (name === "email") {
+      if (!value) {
+        updatedError[name] = "Email is required"
+      }
+      else {
+        mailFormate.test(String(value).toLowerCase()) ?
+          updatedError[name] = "" :
+          updatedError[name] = "This is not a valid email format!"
+      }
     }
-    else {
-      mailFormate.test(String(values.email).toLowerCase()) ?
-        updatedError.email = "This is not a valid email format!" :
-        updatedError.email = ""
-    }
-
     // Password Validate
-    if (!values.password) {
-      updatedError.password = "Password is required"
+    else if (name === "password") {
+      if (!value) {
+        updatedError[name] = "Password is required"
+      }
+      else {
+        value.length < 4 ?
+          updatedError[name] = "Password must be of 4 characters"
+          :
+          updatedError[name] = ""
+      }
+    }
+    // // Confirm Password Validate
+    else if (name === "confPass") {
+      if (!value) {
+        updatedError[name] = "confirm password is required"
+      }
+      else {
+        updatedError[name] = ""
+      }
+    }
+    // // Postion Validate
+    else if (name === "position") {
+      if (!value) {
+        updatedError[name] = "position is required"
+      }
+      else {
+        updatedError[name] = ""
+      }
+    }
+    else if (name === "gender") {
+      if (!value) {
+        updatedError[name] = "gender is required"
+      }
+      else {
+        updatedError[name] = ""
+      }
     }
     else {
-      values.password.length < 4 ?
-        updatedError.password = "Password must be of 4 characters"
-        :
-        updatedError.password = ""
-    }
-
-    // Confirm Password Validate
-    if (!values.confPass) {
-      updatedError.confPass = "confPass is required"
-    } else {
-      values.confPass !== values.password ?
-        updatedError.confPass = "Should be same as confirm password"
-        :
-        updatedError.confPass = ""
-    }
-
-    // Postion Validate
-    if (!values.position) {
-      updatedError.position = "Position is required"
-    } else {
-      updatedError.position = ""
-    }
-
-    // Gender Validate
-    if (!values.gender) {
-      updatedError.gender = "Gender is required"
-    } else {
-      updatedError.gender = ""
+      updatedError[name] = ""
     }
     return updatedError
   }
@@ -97,7 +107,7 @@ const ContactUs = () => {
                         name="name"
                         value={details.name}
                         onChange={onChange}
-                        onBlur={onBlur}
+                        onBlur={(e) => onBlur(e)}
                         className="form-control" type="text" placeholder="Full Name" />
                       <span className='error'>{error?.name}</span>
                     </div>
@@ -107,7 +117,7 @@ const ContactUs = () => {
                         name="email"
                         value={details.email}
                         onChange={onChange}
-                        onBlur={onBlur}
+                        onBlur={(e) => onBlur(e)}
                         className="form-control" type="text" placeholder="E-mail Address" />
                       <span className='error'>{error?.email}</span>
                     </div>
@@ -117,7 +127,7 @@ const ContactUs = () => {
                         name="position"
                         value={details.position}
                         onChange={onChange}
-                        onBlur={onBlur}
+                        onBlur={(e) => onBlur(e)}
                         className="form-select mt-3" >
                         <option value="">Select Reference</option>
                         <option value="Friends">Friends</option>
@@ -132,7 +142,7 @@ const ContactUs = () => {
                         name="password"
                         value={details.password}
                         onChange={onChange}
-                        onBlur={onBlur}
+                        onBlur={(e) => onBlur(e)}
                         className="form-control" type="password" placeholder="Password" autoComplete="on" />
                       <div className="valid-feedback">Password field is valid!</div>
                       <span className='error'>{error?.password}</span>
@@ -142,7 +152,7 @@ const ContactUs = () => {
                         name="confPass"
                         value={details.confPass}
                         onChange={onChange}
-                        onBlur={onBlur}
+                        onBlur={(e) => onBlur(e)}
                         className="form-control" type="password" placeholder="confPass" autoComplete="on" />
                       <div className="valid-feedback">Confirm Password field is valid!</div>
                       <span className='error'>{error?.confPass}</span>
@@ -154,7 +164,7 @@ const ContactUs = () => {
                         type="radio"
                         value="male"
                         onChange={onChange}
-                        onBlur={onBlur}
+                        onBlur={(e) => onBlur(e)}
                         name="gender"
                         className="btn-check"
                         id="male" autoComplete="off" />
@@ -163,7 +173,7 @@ const ContactUs = () => {
                       <input type="radio"
                         value="female"
                         onChange={onChange}
-                        onBlur={onBlur}
+                        onBlur={(e) => onBlur(e)}
                         name="gender"
                         className="btn-check"
                         id="female" autoComplete="off" />
@@ -173,14 +183,14 @@ const ContactUs = () => {
                         type="radio"
                         value="other"
                         onChange={onChange}
-                        onBlur={onBlur}
+                        onBlur={(e) => onBlur(e)}
                         name="gender"
                         className="btn-check"
                         id="secret" autoComplete="off" />
                       <label className="btn btn-sm btn-outline-secondary" htmlFor="secret">Other</label>
                       <div className="valid-feedback mv-up">You selected a gender!</div>
                       <div className="invalid-feedback mv-up">Please select a gender!</div>
-                      <span className='error'>{error?.password}</span>
+                      <span className='error'>{error?.gender}</span>
                     </div>
 
                     <div className="form-check">
